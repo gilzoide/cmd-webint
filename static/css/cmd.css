@@ -9,20 +9,3 @@
 	padding-top: 70px;
 	padding-bottom: 70px;
 }
-
-.register-form-row {
-	margin-top: 10pt;
-	margin-bottom: 10pt;
-}
-
-.register-form-label {
-	vertical-align: middle;
-	text-align: right;
-}
-
-.vertical-align {
-	display: flex;
-	align-items: center;
-	margin-top: 10pt;
-	margin-bottom: 10pt;
-}
