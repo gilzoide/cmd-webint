@@ -1,0 +1,6 @@
+static/bower_components
+static/.webassets-cache/
+static/dist
+
+.directory
+*~

@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Coh-Metrix-Dementia</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="shortcut icon" href="{{ url_for('static', filename='img/favicon.ico') }}">
+
+	{% assets "css" %}
+	<link rel="stylesheet" type="text/css" href="{{ ASSET_URL }}">
+	{% endassets %}
+	<link href='http://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
+</head>
+<body class="index-body">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-6 col-xs-12">
+				<div style="color: #333;">
+					<h1>Welcome!</h1>
+					<h2>This is Coh-Metrix-Dementia</h2>
+
+					<p>Lorem ipsum dolor sit amet, vix nibh homero laoreet ea, id apeirian perpetua eam, per principes rationibus at. Has senserit theophrastus an, id fugit vocent eum. Ius aliquip deleniti in. Debitis petentium euripidis ad usu, per no numquam phaedrum comprehensam. At pri etiam congue aperiam. Iriure vivendo eu sit.
+					</p>
+					<p>
+					Ne decore scaevola evertitur duo. Mei natum aeque blandit te. Soluta senserit vix te. Fuisset expetendis mei in, dico philosophia mea ex. Audire consequuntur eos ei, at usu maiorum interesset. Alienum constituam duo id, qui dicunt utamur quaerendum ad.
+					</p>
+					<p>
+					Solum falli appetere cu nam, pri ad corpora delicatissimi, sanctus deseruisse deterruisset ut has. Ne ius possim electram, ex usu agam mentitum. Qui perpetua rationibus ut. Has eu aperiam fabulas.
+					</p>
+					<p>
+					Eu eum nibh pertinax iracundia, no virtute blandit consequat sea. Platonem recteque abhorreant qui ad. Eirmod sensibus est eu, odio fuisset ne est. In pro sint velit. Pro ut semper putant voluptatum, nam dico homero minimum an, ea mazim doming eum. Pri et partem dissentiunt, consul disputationi cu nec, nam eu impetus ancillae.
+					</p>
+				</div>
+			</div>
+			<div class="col-md-6 col-xs-12">
+				<div style="border-radius: 5px; padding: 15px; background-color: #EEE;">
+					<h2>Login</h2>
+					<form action="login" method="POST">
+						<div class="row vertical-align">
+							<div class="col-xs-4 register-form-label">
+								Username
+							</div>
+							<div class="col-xs-8">
+								<input type="text" name="username" class="form-control" placeholder="Username"/>
+							</div>
+						</div>
+
+						<div class="row vertical-align">
+							<div class="col-xs-4 register-form-label">
+								Password
+							</div>
+							<div class="col-xs-8">
+								<input type="password" name="password" class="form-control" placeholder="Password"/>
+							</div>
+						</div>
+
+						<div class="row vertical-align">
+							<div class="col-xs-9 text-right">
+								<input type="checkbox" name="remember_me" value="true">Remember me
+
+								<a href="#" style="padding-left: 5pt;">Forgot your password?</a>
+							</div>
+
+							<div class="col-xs-3">
+								<div class="text-right">
+									<input type="submit" value="Login" class="btn btn-primary"/>
+								</div>
+							</div>
+						</div>
+					</form>
+				</div>
+
+				<div class="">
+					<h2>Or register</h2>
+					<form action="register" method="POST">
+						<div class="row vertical-align">
+							<div class="col-xs-4 register-form-label">
+								Your full name
+							</div>
+							<div class="col-xs-8">
+								<input type="text" name="fullname" class="form-control" placeholder="John Doe"/>
+							</div>
+						</div>
+
+						<div class="row vertical-align">
+							<div class="col-xs-4 register-form-label">
+								Your Email
+							</div>
+							<div class="col-xs-8">
+								<input type="text" name="email" class="form-control" placeholder="johndoe@example.com"/>
+							</div>
+						</div>
+
+						<div class="row vertical-align">
+							<div class="col-xs-4 register-form-label">
+								Username
+							</div>
+							<div class="col-xs-8">
+								<input type="text" name="username" class="form-control" placeholder="johndoe"/>
+							</div>
+						</div>
+
+						<div class="row vertical-align">
+							<div class="col-xs-4 register-form-label">
+								Password
+							</div>
+							<div class="col-xs-8">
+								<input type="password" name="password" class="form-control" placeholder="Type your password"/>
+							</div>
+						</div>
+
+						<div class="row vertical-align">
+							<div class="col-xs-4 register-form-label">
+								Confirm password
+							</div>
+							<div class="col-xs-8">
+								<input type="password" name="confirm-password" class="form-control" placeholder="Type your password again"/>
+							</div>
+						</div>
+
+						<div class="text-right">
+							<input type="submit" value="Submit" class="btn btn-primary"/>
+						</div>
+						
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	{% assets "js" %}
+	<script type="text/javascript" src="{{ ASSET_URL }}"></script>
+	{% endassets %}
+</body>
+</html>

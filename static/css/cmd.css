@@ -1,0 +1,28 @@
+.index-body { 
+	min-height: 500px;
+	height: 100hv;
+	padding-top: 30px;
+	padding-bottom: 30px;
+}
+
+.main-body { 
+	padding-top: 70px;
+	padding-bottom: 70px;
+}
+
+.register-form-row {
+	margin-top: 10pt;
+	margin-bottom: 10pt;
+}
+
+.register-form-label {
+	vertical-align: middle;
+	text-align: right;
+}
+
+.vertical-align {
+	display: flex;
+	align-items: center;
+	margin-top: 10pt;
+	margin-bottom: 10pt;
+}
