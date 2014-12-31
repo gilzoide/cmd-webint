@@ -49,5 +49,10 @@ def analyze():
 	return render_template('analyze.html')
 
 
+@app.route('/submit', methods=['POST'])
+def submit():
+	return 'You tried to submit a text: ' + str(request.form)	
+
+
 if __name__ == '__main__':
 	app.run()
