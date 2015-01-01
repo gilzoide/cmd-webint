@@ -1,6 +1,9 @@
-static/bower_components
-static/.webassets-cache/
-static/dist
+webint/static/bower_components
+webint/static/.webassets-cache/
+webint/static/dist
 
 .directory
 *~
+
+__pycache__
+instance/

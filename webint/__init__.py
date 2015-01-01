@@ -6,9 +6,8 @@ from flask_debugtoolbar import DebugToolbarExtension
 app = Flask(__name__)
 assets = Environment(app)
 
-app.debug=True
-
-app.config['SECRET_KEY'] = 'development key'
+app.config.from_object('config')
+app.config.from_object('instance.config')
 
 toolbar = DebugToolbarExtension(app)
 
@@ -26,33 +25,4 @@ bundles = {
 
 assets.register(bundles)
 
-# Functions to handle URLs
-
-@app.route('/')
-@app.route('/index.html')
-def index():
-	return render_template('index.html')	
-
-
-@app.route('/register', methods=['POST'])
-def register():
-	return 'You tried to register: ' + str(request.form)
-
-
-@app.route('/login', methods=['POST'])
-def login():
-	return redirect(url_for('analyze'))
-
-
-@app.route('/analyze')
-def analyze():
-	return render_template('analyze.html')
-
-
-@app.route('/submit', methods=['POST'])
-def submit():
-	return 'You tried to submit a text: ' + str(request.form)	
-
-
-if __name__ == '__main__':
-	app.run()
+from webint import views
