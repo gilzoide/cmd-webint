@@ -2,8 +2,11 @@ webint/static/bower_components
 webint/static/.webassets-cache/
 webint/static/dist
 
+.ropeproject
 .directory
 *~
+*.swp
 
 __pycache__
 instance/
+

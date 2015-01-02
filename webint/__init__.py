@@ -1,13 +1,13 @@
-from flask import Flask, render_template, g, request, redirect, url_for
+from flask import Flask
 from flask.ext.assets import Bundle, Environment
 from flask_debugtoolbar import DebugToolbarExtension
 
 # Application configuration
-app = Flask(__name__)
+app = Flask(__name__, instance_relative_config=True)
 assets = Environment(app)
 
 app.config.from_object('config')
-app.config.from_object('instance.config')
+app.config.from_pyfile('config.py')
 
 toolbar = DebugToolbarExtension(app)
 
@@ -15,8 +15,8 @@ toolbar = DebugToolbarExtension(app)
 bundles = {
     'css': Bundle('bower_components/bootstrap/dist/css/bootstrap.css',
                   'css/cmd.css',
-                   filters='cssmin',
-                   output='dist/index.min.css'),
+                  filters='cssmin',
+                  output='dist/index.min.css'),
     'js': Bundle('bower_components/jquery/dist/jquery.js',
                  'bower_components/bootstrap/dist/js/bootstrap.js',
                  filters='rjsmin',
@@ -26,3 +26,5 @@ bundles = {
 assets.register(bundles)
 
 from webint import views
+from webint import models
+from webint import forms
