@@ -1,43 +1,61 @@
 from webint import db, coh
 
 
-def as_json(category):
-    """Jsonify a category.
-    :returns: A dictionary containing the values for all the metrics in the
-        category.
+class Category:
+    def from_resultset(self, resultset):
+        """Copy the values from a Resultset.
 
-    """
-    d = {}
-    for m in category.category.metrics:
-        value = getattr(category, m.column_name)
+        :resultset: A ResultSet containing the parameters to be copied
+            to this instance.
 
-        if isinstance(value, float) or isinstance(value, int):
-            d[m.column_name] = value
-        else:
-            d[m.column_name] = str(value)
+        """
+        for metric, value in resultset.items():
+            setattr(self, metric.column_name, value)
 
-    return d
+    def as_json(self):
+        """Jsonify a category.
+
+        :returns: A dictionary containing the values for all the metrics in the
+            category.
+
+        """
+        d = {}
+        for m in self.category.metrics:
+            value = getattr(self, m.column_name)
+
+            if isinstance(value, float) or isinstance(value, int):
+                d[m.column_name] = value
+            else:
+                d[m.column_name] = str(value)
+
+        return d
 
 
-def from_coh_category(category):
+def generate_category(category):
     """Convert a Coh-Metrix-Port category into a SQLAlchemy class.
 
     :category: An instance of coh.base.Category
     :returns: A SQLAlchemy class suitable for storing the category to a DB.
     """
     attrs = {'__tablename__': category.table_name,
-             'id': db.Column(db.Integer, primary_key=True),
-             'category': category}
+             'id': db.Column(db.Integer, primary_key=True, autoincrement=True),
+             # Relationship with 'texts' table.
+             'text_id': db.Column(db.Integer, db.ForeignKey('texts.id')),
+             'text': db.relationship("Text",
+                                     backref=db.backref(category.table_name,
+                                                        uselist=False)),
+             'category': category,
+             }
 
     for metric in category.metrics:
         attrs[metric.column_name] = db.Column(db.Float)
 
-    C = type(category.__class__.__name__, (db.Model,), attrs)
+    C = type(category.__class__.__name__, (Category, db.Model), attrs)
 
     return C
 
 
-categories = [from_coh_category(category)
+categories = [generate_category(category)
               for category in coh.all_metrics.categories]
 
 
@@ -62,7 +80,7 @@ class Text(db.Model):
     source = db.Column(db.String(50))
     publication_date = db.Column(db.Date)
     genre = db.Column(db.String(50))
-    content = db.Column(db.String(300))
+    content = db.Column(db.Text)
 
     def __init__(self, title='', author='', source='', publication_date='',
                  genre='', content=''):
@@ -115,4 +133,9 @@ class Text(db.Model):
         """
         text = self.as_coh_text()
         r = coh.all_metrics.values_for_text(text)
-        return str(r)
+
+        for category, results in r.items():
+            C = find_category(category.table_name)
+            c = C()
+            c.from_resultset(results)
+            setattr(self, category.table_name, c)

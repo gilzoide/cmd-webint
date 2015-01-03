@@ -1,6 +1,7 @@
 from flask import render_template, request, redirect, url_for, json, g
-from webint import app
-from webint.models import Text, as_json, find_category
+from webint import app, db
+from webint.models import Text, find_category
+import datetime
 
 
 @app.route('/')
@@ -27,15 +28,19 @@ def analyze():
 
 @app.route('/submit', methods=['POST'])
 def submit():
-    Hypernyms = find_category('hypernyms')
-    c = Hypernyms(hypernyms_verbs=10)
-
-    return json.dumps([{c.__tablename__: as_json(c)}])
+    if request.form['publication_date']:
+        publication_date = request.form['publication_date']
+    else:
+        publication_date = datetime.date.today()
 
     t = Text(title=request.form['title'],
              author=request.form['author'],
              source=request.form['source'],
-             publication_date=request.form['publication_date'],
+             publication_date=publication_date,
              genre=request.form['genre'],
              content=request.form['content'])
-    return '<p>'.join(t.analyze().split('\n'))
+    t.analyze()
+    db.session.add(t)
+    db.session.commit()
+
+    return redirect(url_for('analyze'))
