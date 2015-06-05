@@ -15,6 +15,11 @@
 	cursor: hand;
 }
 
+.modal-body {
+    max-height: calc(100vh - 210px);
+    overflow-y: auto;
+}
+
 @media (max-width: 768px) {
     .top-margin-xs {
         margin-top:20px;

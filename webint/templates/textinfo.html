@@ -1,0 +1,36 @@
+<h3>General info</h3>
+<table class="table table-striped">
+    <tr>
+        <td><b>Title</b></td>
+        <td>{{ text.title }}</td>
+    </tr>
+    <tr>
+        <td><b>Author</b></td>
+        <td>{{ text.author }}</td>
+    </tr>
+    <tr>
+        <td><b>Source</b></td>
+        <td>{{ text.source }}</td>
+    </tr>
+    <tr>
+        <td><b>Publication date</b></td>
+        <td>{{ text.publication_date }}</td>
+    </tr>
+    <tr>
+        <td><b>Genre</b></td>
+        <td>{{ text.genre }}</td>
+    </tr>
+</table>
+
+{% for category in categories%}
+<h3>{{ category.category.name }}</h3>
+<table class="table table-striped">
+    {% set cat = getattr(text, category.category.table_name) %}
+    {% for metric in category.category.metrics %}
+    <tr>
+        <td class="col-xs-7">{{ metric.name }}</td>
+        <td class="col-xs-5">{{ getattr(cat, metric.column_name) }}</td>
+    </tr>
+    {% endfor %}
+</table>
+{% endfor %}

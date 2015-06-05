@@ -2,10 +2,13 @@ from flask import Flask
 from flask.ext.assets import Bundle, Environment
 from flask_debugtoolbar import DebugToolbarExtension
 from flask.ext.sqlalchemy import SQLAlchemy
+from werkzeug.contrib.fixers import ProxyFix
 import coh
 
 # Application configuration
 app = Flask(__name__, instance_relative_config=True)
+app.wsgi_app = ProxyFix(app.wsgi_app)
+
 assets = Environment(app)
 
 app.config.from_object('config')

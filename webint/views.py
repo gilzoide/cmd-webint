@@ -1,6 +1,6 @@
-from flask import render_template, request, redirect, url_for, json, g
+from flask import render_template, request, redirect, url_for, g
 from webint import app, db
-from webint.models import Text, find_category
+from webint.models import Text, categories
 import datetime
 
 
@@ -44,3 +44,16 @@ def submit():
     db.session.commit()
 
     return redirect(url_for('analyze'))
+
+
+@app.route('/metrics/<int:text_id>')
+def metrics(text_id):
+    """TODO: Docstring for metrics.
+
+    :arg1: TODO
+    :returns: TODO
+
+    """
+    text = Text.query.filter(Text.id == text_id).first()
+    return render_template('textinfo.html', text=text, categories=categories,
+                           getattr=getattr)
