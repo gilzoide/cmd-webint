@@ -1,18 +1,26 @@
-from flask import render_template, request, redirect, url_for, g
+from flask import render_template, request, redirect, url_for, g, flash
 from webint import app, db
 from webint.models import Text, categories
+from webint.forms import UserRegistrationForm
 import datetime
 
 
 @app.route('/')
 @app.route('/index.html')
 def index():
-    return render_template('index.html')
+    form = UserRegistrationForm()
+    return render_template('index.html', form=form)
 
 
 @app.route('/register', methods=['POST'])
 def register():
-    return 'You tried to register: ' + str(request.form)
+    form = UserRegistrationForm(request.form)
+    if request.method == 'POST' and form.validate():
+        # user = User(form.username.data, form.email.data, form.password.data)
+        # db.session.add(user)
+        flash('Registration successfull. Welcome!', 'success')
+        return redirect(url_for('analyze'))
+    return render_template('index.html', form=form)
 
 
 @app.route('/login', methods=['POST'])

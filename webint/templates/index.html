@@ -1,129 +1,199 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<title>Coh-Metrix-Dementia</title>
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="shortcut icon" href="{{ url_for('static', filename='img/favicon.ico') }}">
+    <title>Coh-Metrix-Dementia</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='img/favicon.ico') }}">
 
-	{% assets "css" %}
-	<link rel="stylesheet" type="text/css" href="{{ ASSET_URL }}">
-	{% endassets %}
-	<link href='http://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
+    {% assets "css" %}
+    <link rel="stylesheet" type="text/css" href="{{ ASSET_URL }}">
+    {% endassets %}
+    <link href='http://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
 </head>
 <body class="index-body">
-	<div class="container">
-		<div class="row">
-			<div class="col-md-6 col-xs-12">
-				<div style="color: #333;">
-					<h1>Welcome!</h1>
-					<h2>This is Coh-Metrix-Dementia</h2>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 col-xs-12">
+                <div style="color: #333;">
+                    <h1>Welcome!</h1>
+                    <h2>This is Coh-Metrix-Dementia</h2>
 
-					<p>Lorem ipsum dolor sit amet, vix nibh homero laoreet ea, id apeirian perpetua eam, per principes rationibus at. Has senserit theophrastus an, id fugit vocent eum. Ius aliquip deleniti in. Debitis petentium euripidis ad usu, per no numquam phaedrum comprehensam. At pri etiam congue aperiam. Iriure vivendo eu sit.
-					</p>
-					<p>
-					Ne decore scaevola evertitur duo. Mei natum aeque blandit te. Soluta senserit vix te. Fuisset expetendis mei in, dico philosophia mea ex. Audire consequuntur eos ei, at usu maiorum interesset. Alienum constituam duo id, qui dicunt utamur quaerendum ad.
-					</p>
-					<p>
-					Solum falli appetere cu nam, pri ad corpora delicatissimi, sanctus deseruisse deterruisset ut has. Ne ius possim electram, ex usu agam mentitum. Qui perpetua rationibus ut. Has eu aperiam fabulas.
-					</p>
-					<p>
-					Eu eum nibh pertinax iracundia, no virtute blandit consequat sea. Platonem recteque abhorreant qui ad. Eirmod sensibus est eu, odio fuisset ne est. In pro sint velit. Pro ut semper putant voluptatum, nam dico homero minimum an, ea mazim doming eum. Pri et partem dissentiunt, consul disputationi cu nec, nam eu impetus ancillae.
-					</p>
-				</div>
-			</div>
-			<div class="col-md-6 col-xs-12">
-				<div style="border-radius: 5px; padding: 15px; background-color: #EEE;">
-					<h2>Login</h2>
-					<form action="login" method="POST" class="form-horizontal">
-						<div id="login-username" class="form-group has-feedback">
-							<label for="inputLoginUsername" class="col-sm-2 control-label">Username</label>
-							<div class="col-sm-10">
-						    	<input type="text" class="form-control" id="inputLoginUsername" placeholder="Username" name="username">
-						    	<span id="login-error-icon" class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
-						    </div>
-						</div>
+                    <p>Lorem ipsum dolor sit amet, vix nibh homero laoreet ea, id apeirian perpetua eam, per principes rationibus at. Has senserit theophrastus an, id fugit vocent eum. Ius aliquip deleniti in. Debitis petentium euripidis ad usu, per no numquam phaedrum comprehensam. At pri etiam congue aperiam. Iriure vivendo eu sit.
+                    </p>
+                    <p>
+                    Ne decore scaevola evertitur duo. Mei natum aeque blandit te. Soluta senserit vix te. Fuisset expetendis mei in, dico philosophia mea ex. Audire consequuntur eos ei, at usu maiorum interesset. Alienum constituam duo id, qui dicunt utamur quaerendum ad.
+                    </p>
+                    <p>
+                    Solum falli appetere cu nam, pri ad corpora delicatissimi, sanctus deseruisse deterruisset ut has. Ne ius possim electram, ex usu agam mentitum. Qui perpetua rationibus ut. Has eu aperiam fabulas.
+                    </p>
+                    <p>
+                    Eu eum nibh pertinax iracundia, no virtute blandit consequat sea. Platonem recteque abhorreant qui ad. Eirmod sensibus est eu, odio fuisset ne est. In pro sint velit. Pro ut semper putant voluptatum, nam dico homero minimum an, ea mazim doming eum. Pri et partem dissentiunt, consul disputationi cu nec, nam eu impetus ancillae.
+                    </p>
+                </div>
+            </div>
+            <div class="col-md-6 col-xs-12">
+                <div style="border-radius: 5px; padding: 15px; background-color: #EEE;">
+                    <h2>Login</h2>
+                    <form action="login" method="POST" class="form-horizontal">
+                        <div id="login-username" class="form-group has-feedback">
+                            <label for="inputLoginUsername" class="col-sm-2 control-label">Username</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="inputLoginUsername" placeholder="Username" name="username">
+                                <span id="login-error-icon" class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
+                            </div>
+                        </div>
 
-						<div class="form-group">
-							<label for="inputLoginPassword" class="col-sm-2 control-label">Password</label>
-							<div class="col-sm-10">
-								<div class="input-group">
-							    	<input type="password" class="form-control" id="inputLoginPassword" placeholder="Password" name="password">
-							    	<a href="#" class="input-group-addon" title="Recover password"><span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span></a>
-								</div>
-							</div>
-						</div>
+                        <div class="form-group">
+                            <label for="inputLoginPassword" class="col-sm-2 control-label">Password</label>
+                            <div class="col-sm-10">
+                                <div class="input-group">
+                                    <input type="password" class="form-control" id="inputLoginPassword" placeholder="Password" name="password">
+                                    <a href="#" class="input-group-addon" title="Recover password"><span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span></a>
+                                </div>
+                            </div>
+                        </div>
 
-						<div class="form-group">
-						    <div class="col-sm-offset-2 col-sm-4">
-						      <div class="checkbox">
-						        <label>
-						          <input type="checkbox"> Remember me
-						        </label>
-						      </div>
-						    </div>
-						</div>
+                        <div class="form-group">
+                            <div class="col-sm-offset-2 col-sm-4">
+                              <div class="checkbox">
+                                <label>
+                                  <input type="checkbox"> Remember me
+                                </label>
+                              </div>
+                            </div>
+                        </div>
 
-						<div class="form-group">
-							<div class="col-sm-offset-2 col-sm-10">
-						        <input type="submit" value="Login" class="btn btn-primary"/>
-						    </div>
-						</div>
-					</form>
-				</div>
+                        <div class="form-group">
+                            <div class="col-sm-offset-2 col-sm-10">
+                                <input type="submit" value="Login" class="btn btn-primary"/>
+                            </div>
+                        </div>
+                    </form>
+                </div>
 
-				<div class="">
-					<h2>Or register</h2>
-					<form action="register" method="POST" class="form-horizontal">
-						<div class="form-group">
-							<label for="inputRegisterFullname" class="col-sm-4 control-label">Your full name</label>
-							<div class="col-sm-8">
-						    	<input type="text" class="form-control" id="inputRegisterFullname" placeholder="John Doe" name="fullname">
-						    </div>
-						</div>
+                <div class="">
+                    <h2>Or register</h2>
+                    <form action="register" method="POST" class="form-horizontal">
+                        {{ form.hidden_tag() }}
+                        <div class="form-group">
+                            <label for="inputRegisterFullname" class="col-sm-4 control-label">{{ form.username.label }}</label>
+                            <div class="col-sm-8">
+                                {{ form.username(**{'class': 'form-control',
+                                                    'id': 'inputRegisterFullname',
+                                                    'placeholder': 'John Doe'}) }}
+                                <!--
+                                <input type="text" class="form-control" id="inputRegisterFullname" placeholder="John Doe" name="fullname">
+                                -->
+                                {% if form.username.errors %}
+                                    <div class="alert alert-danger" role="alert" style="margin-top: 5pt;">
+                                        <p>There are errors in this field:</p>
+                                        <p></p>
+                                        <ul>
+                                            {% for error in form.username.errors %}
+                                                <li>{{ error }}</li>
+                                            {% endfor %}
+                                        </ul>
+                                    </div>
+                                {% endif %}
+                            </div>
+                        </div>
 
-						<div class="form-group">
-							<label for="inputRegisterEmail" class="col-sm-4 control-label">Your email</label>
-							<div class="col-sm-8">
-						    	<input type="text" class="form-control" id="inputRegisterEmail" placeholder="johndoe@example.com" name="email">
-						    </div>
-						</div>
+                        <div class="form-group">
+                            <label for="inputRegisterEmail" class="col-sm-4 control-label">{{ form.email.label }}</label>
+                            <div class="col-sm-8">
+                                {{ form.email(**{'class': 'form-control',
+                                                 'id': 'inputRegisterEmail',
+                                                 'placeholder': 'johndoe@example.com'}) }}
+                                {% if form.email.errors %}
+                                    <div class="alert alert-danger" role="alert" style="margin-top: 5pt;">
+                                        <p>There are errors in this field:</p>
+                                        <p></p>
+                                        <ul>
+                                            {% for error in form.email.errors %}
+                                                <li>{{ error }}</li>
+                                            {% endfor %}
+                                        </ul>
+                                    </div>
+                                {% endif %}
+                                <!--
+                                <input type="text" class="form-control" id="inputRegisterEmail" placeholder="johndoe@example.com" name="email">
+                                -->
+                            </div>
+                        </div>
 
-						<div class="form-group">
-							<label for="inputRegisterUsername" class="col-sm-4 control-label">Username</label>
-							<div class="col-sm-8">
-						    	<input type="text" class="form-control" id="inputRegisterUsername" placeholder="johndoe" name="username">
-						    </div>
-						</div>
+                        <!--
+                        <div class="form-group">
+                            <label for="inputRegisterUsername" class="col-sm-4 control-label">Username</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" id="inputRegisterUsername" placeholder="johndoe" name="username">
+                            </div>
+                        </div>
+                        -->
 
-						<div class="form-group">
-							<label for="inputRegisterPassword" class="col-sm-4 control-label">Password</label>
-							<div class="col-sm-8">
-						    	<input type="password" class="form-control" id="inputRegisterPassword" placeholder="Type a password" name="password">
-						    </div>
-						</div>
+                        <div class="form-group">
+                            <label for="inputRegisterPassword" class="col-sm-4 control-label">{{ form.password.label }}</label>
+                            <div class="col-sm-8">
+                                {{ form.password(**{'class': 'form-control',
+                                                    'id': 'inputRegisterPassword',
+                                                    'placeholder': 'Type a password'}) }}
+                                {% if form.password.errors %}
+                                    <div class="alert alert-danger" role="alert" style="margin-top: 5pt;">
+                                        <p>There are errors in this field:</p>
+                                        <p></p>
+                                        <ul>
+                                            {% for error in form.password.errors %}
+                                                <li>{{ error }}</li>
+                                            {% endfor %}
+                                        </ul>
+                                    </div>
+                                {% endif %}
+                                <!--
+                                <input type="password" class="form-control" id="inputRegisterPassword" placeholder="Type a password" name="password">
+                                -->
+                            </div>
+                        </div>
 
-						<div class="form-group">
-							<label for="inputRegisterConfirmPassword" class="col-sm-4 control-label">Confirm password</label>
-							<div class="col-sm-8">
-						    	<input type="password" class="form-control" id="inputRegisterConfirmPassword" placeholder="Type your password again" name="confirmPassword">
-						    </div>
-						</div>
+                        <div class="form-group">
+                            <label for="inputRegisterConfirmPassword" class="col-sm-4 control-label">{{ form.confirm.label }}</label>
+                            <div class="col-sm-8">
+                                {{ form.confirm(**{'class': 'form-control',
+                                                   'id': 'inputRegisterConfirmPassword',
+                                                   'placeholder': 'Type your password again'}) }}
+                                {% if form.confirm.errors %}
+                                    <div class="alert alert-danger" role="alert" style="margin-top: 5pt;">
+                                        <p>There are errors in this field:</p>
+                                        <p></p>
+                                        <ul>
+                                            {% for error in form.confirm.errors %}
+                                                <li>{{ error }}</li>
+                                            {% endfor %}
+                                        </ul>
+                                    </div>
+                                {% endif %}
+                                <!--
+                                <input type="password" class="form-control" id="inputRegisterConfirmPassword" placeholder="Type your password again" name="confirmPassword">
+                                -->
+                            </div>
+                        </div>
 
-						<div class="form-group">
-							<div class="col-sm-offset-4 col-sm-8">
-						        <input type="submit" value="Register" class="btn btn-primary"/>
-						    </div>
-						</div>
-					</form>
-				</div>
-			</div>
-		</div>
-	</div>
+                        <div class="form-group">
+                            <div class="col-sm-offset-4 col-sm-8">
+                                {{ form.submit(**{'class': 'btn btn-primary'}) }}
+                                <!--
+                                <input type="submit" value="Register" class="btn btn-primary"/>
+                                -->
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 
-	{% assets "js" %}
-	<script type="text/javascript" src="{{ ASSET_URL }}"></script>
-	{% endassets %}
+    {% assets "js" %}
+    <script type="text/javascript" src="{{ ASSET_URL }}"></script>
+    {% endassets %}
 
-	<script type="text/javascript" src="static/js/index.js"></script>
+    <script type="text/javascript" src="static/js/index.js"></script>
 </body>
 </html>
