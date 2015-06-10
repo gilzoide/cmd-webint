@@ -11,3 +11,9 @@ class UserRegistrationForm(Form):
     ])
     confirm = PasswordField('Confirm password')
     submit = SubmitField('Register')
+
+
+class LoginForm(Form):
+    email = StringField('Email', [validators.Required()])
+    password = PasswordField('Password', [validators.Required(), ])
+    submit = SubmitField('Login')
