@@ -2,6 +2,8 @@ from flask import Flask
 from flask.ext.assets import Bundle, Environment
 from flask_debugtoolbar import DebugToolbarExtension
 from flask.ext.sqlalchemy import SQLAlchemy
+from flask.ext.login import LoginManager
+from flask.ext.bcrypt import Bcrypt
 from werkzeug.contrib.fixers import ProxyFix
 # from flask_wtf.csrf import CsrfProtect
 import coh
@@ -16,11 +18,16 @@ assets = Environment(app)
 app.config.from_object('config')
 app.config.from_pyfile('config.py')
 
+coh.config.from_object('config')
+
 toolbar = DebugToolbarExtension(app)
 
 db = SQLAlchemy(app)
 
-coh.config.from_object('config')
+login_manager = LoginManager()
+login_manager.init_app(app)
+
+bcrypt = Bcrypt(app)
 
 # Bundles for joining and minifying CSS and JS files
 bundles = {

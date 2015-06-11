@@ -1,11 +1,12 @@
 from flask import render_template, request, redirect, url_for, g, flash
-from webint import app, db
-from webint.models import Text, categories
+from webint import app, db, login_manager, bcrypt
+from webint.models import User, Text, categories
 from webint.forms import UserRegistrationForm, LoginForm
 import datetime
 
 
 @app.route('/')
+@app.route('/index.htm')
 @app.route('/index.html')
 def index():
     login_form = LoginForm()
@@ -21,9 +22,14 @@ def register():
     login_form = LoginForm()
     form = UserRegistrationForm(request.form)
     if form.validate_on_submit():
-        # user = User(form.username.data, form.email.data, form.password.data)
-        # db.session.add(user)
+        user = User(username=form.username.data,
+                    email=form.email.data,
+                    password=bcrypt.generate_password_hash(form.password.data))
+        db.session.add(user)
+        db.session.commit()
+
         flash('Registration successfull. Welcome!', 'success')
+
         return redirect(url_for('analyze'))
     return render_template('index.html', form=form, login_form=login_form)
 
@@ -36,8 +42,14 @@ def login():
     login_form = LoginForm(request.form)
     form = UserRegistrationForm()
     if login_form.validate_on_submit():  # XXX: complete
-        flash('Login successfull. Welcome!', 'success')
-        return redirect(url_for('analyze'))
+        user = db.session.query(User).filter_by(email=form.email.data).first()
+
+        if bcrypt.check_password_hash(user.password, form.password.data):
+            # XXX: complete
+            flash('Login successfull. Welcome!', 'success')
+            return redirect(url_for('analyze'))
+        else:
+            return "invalid login"
     return render_template('index.html', form=form, login_form=login_form)
 
 
@@ -78,3 +90,8 @@ def metrics(text_id):
     text = Text.query.filter(Text.id == text_id).first()
     return render_template('textinfo.html', text=text, categories=categories,
                            getattr=getattr)
+
+
+@login_manager.user_loader
+def load_user(id):
+    return db.session.query(User).get(int(id))

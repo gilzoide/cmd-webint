@@ -1,74 +1,31 @@
 from webint import db, coh
 
 
-class Category:
-    def from_resultset(self, resultset):
-        """Copy the values from a Resultset.
+class User(db.Model):
+    __tablename__ = "users"
 
-        :resultset: A ResultSet containing the parameters to be copied
-            to this instance.
+    id = db.Column(db.Integer, primary_key=True, index=True, autoincrement=True)
+    username = db.Column(db.String(60))
+    email = db.Column(db.String(60), index=True, unique=True)
+    password = db.Column(db.String(60))
 
-        """
-        for metric, value in resultset.items():
-            setattr(self, metric.column_name, value)
+    def is_authenticated(self):
+        return True
 
-    def as_json(self):
-        """Jsonify a category.
+    def is_active(self):
+        return True
 
-        :returns: A dictionary containing the values for all the metrics in the
-            category.
+    def is_anonymous(self):
+        return False
 
-        """
-        d = {}
-        for m in self.category.metrics:
-            value = getattr(self, m.column_name)
+    def get_id(self):
+        try:
+            return unicode(self.id)  # Python 2
+        except NameError:
+            return str(self.id)  # Python 3
 
-            if isinstance(value, float) or isinstance(value, int):
-                d[m.column_name] = value
-            else:
-                d[m.column_name] = str(value)
-
-        return d
-
-
-def generate_category(category):
-    """Convert a Coh-Metrix-Port category into a SQLAlchemy class.
-
-    :category: An instance of coh.base.Category
-    :returns: A SQLAlchemy class suitable for storing the category to a DB.
-    """
-    attrs = {'__tablename__': category.table_name,
-             'id': db.Column(db.Integer, primary_key=True, autoincrement=True),
-             # Relationship with 'texts' table.
-             'text_id': db.Column(db.Integer, db.ForeignKey('texts.id')),
-             'text': db.relationship("Text",
-                                     backref=db.backref(category.table_name,
-                                                        uselist=False)),
-             'category': category,
-             }
-
-    for metric in category.metrics:
-        attrs[metric.column_name] = db.Column(db.Float)
-
-    C = type(category.__class__.__name__, (Category, db.Model), attrs)
-
-    return C
-
-
-categories = [generate_category(category)
-              for category in coh.all_metrics.categories]
-
-
-def find_category(name):
-    """Find a category class using its table name.
-
-    :name: The category's table_name.
-    :returns: The corresponding class in the 'categories' list.
-
-    """
-    for category in categories:
-        if category.category.table_name == name:
-            return category
+    def __repr__(self):
+        return '<User: %s>' % (self.email)
 
 
 class Text(db.Model):
@@ -139,3 +96,73 @@ class Text(db.Model):
             c = C()
             c.from_resultset(results)
             setattr(self, category.table_name, c)
+
+
+class Category:
+    def from_resultset(self, resultset):
+        """Copy the values from a Resultset.
+
+        :resultset: A ResultSet containing the parameters to be copied
+            to this instance.
+
+        """
+        for metric, value in resultset.items():
+            setattr(self, metric.column_name, value)
+
+    def as_json(self):
+        """Jsonify a category.
+
+        :returns: A dictionary containing the values for all the metrics in the
+            category.
+
+        """
+        d = {}
+        for m in self.category.metrics:
+            value = getattr(self, m.column_name)
+
+            if isinstance(value, float) or isinstance(value, int):
+                d[m.column_name] = value
+            else:
+                d[m.column_name] = str(value)
+
+        return d
+
+
+def generate_category(category):
+    """Convert a Coh-Metrix-Port category into a SQLAlchemy class.
+
+    :category: An instance of coh.base.Category
+    :returns: A SQLAlchemy class suitable for storing the category to a DB.
+    """
+    attrs = {'__tablename__': category.table_name,
+             'id': db.Column(db.Integer, primary_key=True, autoincrement=True),
+             # Relationship with 'texts' table.
+             'text_id': db.Column(db.Integer, db.ForeignKey('texts.id')),
+             'text': db.relationship("Text",
+                                     backref=db.backref(category.table_name,
+                                                        uselist=False)),
+             'category': category,
+             }
+
+    for metric in category.metrics:
+        attrs[metric.column_name] = db.Column(db.Float)
+
+    C = type(category.__class__.__name__, (Category, db.Model), attrs)
+
+    return C
+
+
+categories = [generate_category(category)
+              for category in coh.all_metrics.categories]
+
+
+def find_category(name):
+    """Find a category class using its table name.
+
+    :name: The category's table_name.
+    :returns: The corresponding class in the 'categories' list.
+
+    """
+    for category in categories:
+        if category.category.table_name == name:
+            return category
