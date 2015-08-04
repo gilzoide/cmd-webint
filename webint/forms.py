@@ -5,6 +5,7 @@ from wtforms import StringField, SubmitField, PasswordField, validators
 class UserRegistrationForm(Form):
     username = StringField('Your full name', [validators.Length(min=4, max=25)])
     email = StringField('Your email', [validators.Required()])
+    institution = StringField('Your institution', [])
     password = PasswordField('Password', [
         validators.Required(),
         validators.EqualTo('confirm', message='Passwords must match')
