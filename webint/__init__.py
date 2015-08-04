@@ -8,6 +8,12 @@ from werkzeug.contrib.fixers import ProxyFix
 # from flask_wtf.csrf import CsrfProtect
 import coh
 
+# XXX: we remove disfluency metrics. Check how to deal with them properly.
+for i, category in enumerate(coh.all_metrics.categories):
+    if isinstance(category, coh.Disfluencies):
+        del coh.all_metrics.categories[i]
+        break
+
 # Application configuration
 app = Flask(__name__, instance_relative_config=True)
 app.wsgi_app = ProxyFix(app.wsgi_app)
