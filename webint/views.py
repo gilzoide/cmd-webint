@@ -1,4 +1,5 @@
 from flask import render_template, request, redirect, url_for, g, flash
+from flask.ext.login import login_required, login_user, logout_user, current_user
 from webint import app, db, login_manager, bcrypt
 from webint.models import User, Text, categories
 from webint.forms import UserRegistrationForm, LoginForm
@@ -28,7 +29,9 @@ def register():
         db.session.add(user)
         db.session.commit()
 
-        flash('Registration successfull. Welcome!', 'success')
+        login_user(user)
+        
+        flash('Registration successfull. You can log in now. Thank you!', 'success')
 
         return redirect(url_for('analyze'))
     return render_template('index.html', form=form, login_form=login_form)
@@ -46,20 +49,30 @@ def login():
 
         if bcrypt.check_password_hash(user.password, form.password.data):
             # XXX: complete
-            flash('Login successfull. Welcome!', 'success')
+            login_user(user)
+            # flash('Login successfull. Welcome!', 'success')
             return redirect(url_for('analyze'))
         else:
-            return "invalid login"
+            flash('Credentials invalid. Please try again.', 'danger')
+            return redirect(url_for('index'))
     return render_template('index.html', form=form, login_form=login_form)
 
 
+@app.route('/logout')
+@login_required
+def logout():
+    logout_user()
+    return redirect(url_for('index'))
+
+
 @app.route('/analyze')
+@login_required
 def analyze():
-    g.Text = Text
     return render_template('analyze.html')
 
 
 @app.route('/submit', methods=['POST'])
+@login_required
 def submit():
     if request.form['publication_date']:
         publication_date = request.form['publication_date']
@@ -73,6 +86,7 @@ def submit():
              genre=request.form['genre'],
              content=request.form['content'])
     t.analyze()
+    current_user.texts.append(t)
     db.session.add(t)
     db.session.commit()
 
@@ -80,6 +94,7 @@ def submit():
 
 
 @app.route('/metrics/<int:text_id>')
+@login_required
 def metrics(text_id):
     """TODO: Docstring for metrics.
 
@@ -95,3 +110,8 @@ def metrics(text_id):
 @login_manager.user_loader
 def load_user(id):
     return db.session.query(User).get(int(id))
+
+
+@login_manager.unauthorized_handler
+def unauthorized():
+    return redirect(url_for('index'))
