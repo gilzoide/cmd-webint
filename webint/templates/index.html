@@ -12,22 +12,28 @@
 </head>
 <body class="index-body">
     <div class="container">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% for msg_category, message in messages %}
+                <div class="alert alert-{{ msg_category }} alert-dismissible" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endwith %}
+    </div>
+
+    <div class="container">
         <div class="row">
             <div class="col-md-6 col-xs-12">
                 <div style="color: #333;">
                     <h1>Welcome!</h1>
                     <h2>This is Coh-Metrix-Dementia</h2>
 
-                    <p>Lorem ipsum dolor sit amet, vix nibh homero laoreet ea, id apeirian perpetua eam, per principes rationibus at. Has senserit theophrastus an, id fugit vocent eum. Ius aliquip deleniti in. Debitis petentium euripidis ad usu, per no numquam phaedrum comprehensam. At pri etiam congue aperiam. Iriure vivendo eu sit.
+                    <p>
+                    Coh-Metrix-Dementia is a system that can analyze texts in terms of several metrics, which are related to cohesion, coherence, and readability, among other textual aspects.
                     </p>
                     <p>
-                    Ne decore scaevola evertitur duo. Mei natum aeque blandit te. Soluta senserit vix te. Fuisset expetendis mei in, dico philosophia mea ex. Audire consequuntur eos ei, at usu maiorum interesset. Alienum constituam duo id, qui dicunt utamur quaerendum ad.
-                    </p>
-                    <p>
-                    Solum falli appetere cu nam, pri ad corpora delicatissimi, sanctus deseruisse deterruisset ut has. Ne ius possim electram, ex usu agam mentitum. Qui perpetua rationibus ut. Has eu aperiam fabulas.
-                    </p>
-                    <p>
-                    Eu eum nibh pertinax iracundia, no virtute blandit consequat sea. Platonem recteque abhorreant qui ad. Eirmod sensibus est eu, odio fuisset ne est. In pro sint velit. Pro ut semper putant voluptatum, nam dico homero minimum an, ea mazim doming eum. Pri et partem dissentiunt, consul disputationi cu nec, nam eu impetus ancillae.
+                    <font color="#A94442"><b>WARNING</b>: This is a <b>pre-alpha</b> version of the system, so more likely than not it contains <i>lots</i> of bugs. This version was released for internal testing purposes only. Please <b>don't</b> use the results of this system for any serious purpose before its final release.</font>
                     </p>
                 </div>
             </div>
@@ -156,6 +162,26 @@
                                 <!--
                                 <input type="text" class="form-control" id="inputRegisterEmail" placeholder="johndoe@example.com" name="email">
                                 -->
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="inputRegisterInstitution" class="col-sm-4 control-label">{{ form.institution.label }}</label>
+                            <div class="col-sm-8">
+                                {{ form.institution(**{'class': 'form-control',
+                                                       'id': 'inputRegisterInstitution',
+                                                       'placeholder': 'John Doe University'}) }}
+                                {% if form.institution.errors %}
+                                    <div class="alert alert-danger" role="alert" style="margin-top: 5pt;">
+                                        <p>There are errors in this field:</p>
+                                        <p></p>
+                                        <ul>
+                                            {% for error in form.institution.errors %}
+                                                <li>{{ error }}</li>
+                                            {% endfor %}
+                                        </ul>
+                                    </div>
+                                {% endif %}
                             </div>
                         </div>
 
