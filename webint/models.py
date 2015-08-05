@@ -1,4 +1,5 @@
 from webint import db, coh
+from sqlalchemy.orm import relationship
 
 
 class User(db.Model):
@@ -6,8 +7,10 @@ class User(db.Model):
 
     id = db.Column(db.Integer, primary_key=True, index=True, autoincrement=True)
     username = db.Column(db.String(60))
+    institution = db.Column(db.String(60))
     email = db.Column(db.String(60), index=True, unique=True)
     password = db.Column(db.String(60))
+    texts = relationship('Text', backref='user')
 
     def is_authenticated(self):
         return True
@@ -38,6 +41,7 @@ class Text(db.Model):
     publication_date = db.Column(db.Date)
     genre = db.Column(db.String(50))
     content = db.Column(db.Text)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
 
     def __init__(self, title='', author='', source='', publication_date='',
                  genre='', content=''):
