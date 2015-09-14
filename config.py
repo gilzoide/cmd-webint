@@ -19,7 +19,7 @@ MALT_WORKING_DIR = '/home/andre/Develop/universal_dependencies/maltparser-1.8.1'
 MALT_MCO = 'ptmalt.linear-1.8.1.mco'
 MALT_JAVA_ARGS = ['-Xmx512m']
 
-LSA_DICT_PATH = '/home/andre/Develop/corpora/lsamodel_wordids_350k.txt.bz2'
+LSA_DICT_PATH = '/home/andre/Develop/corpora/lsamodel_wordids_190k.txt.bz2'
 LSA_MODEL_PATH = '/home/andre/Develop/corpora/lsamodel_lsi.model'
 
 KENLM_LANGUAGE_MODEL = '/home/andre/Develop/corpora/corpus_3gram.binary'

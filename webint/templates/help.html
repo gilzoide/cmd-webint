@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block main_body %}
+<nav class="col-sm-3">
+    <ul class="nav nav-pills nav-stacked">
+        {% for category in categories %}
+        <li><a href="#{{ category.category.table_name }}">{{ category.category.name }}</a></li>
+        {% endfor %}
+    </ul>
+</nav>
+
+<div class="col-sm-9">
+    {% for category in categories %}
+    <div id="{{ category.category.table_name }}"> 
+        <h1>{{ category.category.name }} <a href="#{{ category.category.table_name }}"><span class="glyphicon glyphicon-link" aria-hidden="true" style="font-size: 24px;"></span></a></h1>
+      
+        {% for metric in category.category.metrics %}
+            <!-- <h2>{{ metric.name }}</h2> -->
+            {% if loop.index % 2 == 0 %}
+            <div class="container-fluid" style="background-color: #EEEEEE;">
+            {% else %}
+            <div class="container-fluid">
+            {% endif %}
+            
+            {{ metric.desc | desc_to_html | safe }}
+            </div>
+        {% endfor %}
+
+        <div style="margin-top: 40pt;"/>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

@@ -38,11 +38,14 @@ bcrypt = Bcrypt(app)
 # Bundles for joining and minifying CSS and JS files
 bundles = {
     'css': Bundle('bower_components/bootstrap/dist/css/bootstrap.css',
+                  'bower_components/CodeMirror/lib/codemirror.css',
                   'css/cmd.css',
                   filters='cssmin',
                   output='dist/index.min.css'),
     'js': Bundle('bower_components/jquery/dist/jquery.js',
                  'bower_components/bootstrap/dist/js/bootstrap.js',
+                 'bower_components/bootbox/bootbox.js',
+                 'bower_components/CodeMirror/lib/codemirror.js',
                  filters='rjsmin',
                  output='dist/cmd.min.js'),
 }
