@@ -1,4 +1,5 @@
-from flask import render_template, request, redirect, url_for, g, flash, jsonify
+from flask import render_template, request, redirect, url_for, g, flash,\
+    jsonify, Response
 from flask.ext.login import login_required, login_user, logout_user, current_user
 from webint import app, db, login_manager, bcrypt
 from webint.models import User, Text, categories
@@ -107,21 +108,35 @@ def metrics(text_id, fmt):
 
     """
     text = Text.query.filter(Text.id == text_id).first()
+    # TODO: check if text is not None and is owned by current_user.
 
     if fmt == 'html':
         return render_template('textinfo.html', text=text, categories=categories,
                                getattr=getattr)
+    elif fmt == 'json':
+        return Response(text.as_resultset().as_json(use_names=False),
+                        mimetype='application/json')
+    elif fmt == 'pjson':   # Pretty-printed JSON
+        return jsonify(text.as_resultset().as_dict(use_names=False))
+    elif fmt == 'arff':
+         return Response(text.as_resultset().as_arff(), mimetype='text/plain')
+    elif fmt == 'csv':
+         return Response(text.as_resultset().as_csv(), mimetype='text/csv')
     else:
         return jsonify({'error': 'Unknown format.'}) 
 
 
 @app.route('/help')
-@app.route('/help.htm')
-@app.route('/help.html')
 @login_required
 def help():
     return render_template('help.html', template_name="help",
                             categories=categories)
+
+
+@app.route('/about')
+@login_required
+def about():
+    return render_template('about.html', template_name="about")
 
 
 @login_manager.user_loader

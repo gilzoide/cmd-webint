@@ -86,6 +86,12 @@ class Text(db.Model):
 
         return obj
 
+    def as_resultset(self):
+        # TODO: check how this can be changed.
+        categories = coh.all_metrics.categories
+        return coh.ResultSet([(cat, getattr(self, cat.table_name).as_resultset())
+                               for cat in categories])
+
     def analyze(self):
         """Analyze this text through Coh-Metrix-Dementia.
 
@@ -112,6 +118,11 @@ class Category:
         """
         for metric, value in resultset.items():
             setattr(self, metric.column_name, value)
+
+    def as_resultset(self):
+        return coh.ResultSet([(metric,
+                               getattr(self,metric.column_name))
+                               for metric in self.category.metrics])
 
     def as_json(self):
         """Jsonify a category.

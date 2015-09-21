@@ -16,8 +16,12 @@
 }
 
 .modal-body {
-    max-height: calc(100vh - 210px);
+    max-height: calc(100vh - 235px);
     overflow-y: auto;
+}
+
+.export-button {
+    cursor: pointer;
 }
 
 @media (max-width: 768px) {
