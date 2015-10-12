@@ -30,13 +30,14 @@ def register():
     if form.validate_on_submit():
         user = User(username=form.username.data,
                     email=form.email.data,
+                    institution=form.institution.data,
                     password=bcrypt.generate_password_hash(form.password.data))
         db.session.add(user)
         db.session.commit()
 
         login_user(user)
         
-        flash('Registration successfull. You can log in now. Thank you!', 'success')
+        flash('Registration successfull. You can use the system now. Thank you!', 'success')
 
         return redirect(url_for('analyze'))
     return render_template('index.html', form=form, login_form=login_form)
@@ -84,12 +85,14 @@ def submit():
     else:
         publication_date = datetime.date.today()
 
-    t = Text(title=request.form['title'],
+    t = Text(content=request.form['content'],
+             revised_content=request.form['revised_content'],
+             title=request.form['title'],
              author=request.form['author'],
              source=request.form['source'],
              publication_date=publication_date,
              genre=request.form['genre'],
-             content=request.form['content'])
+             )
     t.analyze()
     current_user.texts.append(t)
     db.session.add(t)
@@ -151,10 +154,16 @@ def unauthorized():
 
 @app.template_filter()
 def desc_to_html(string):
+    if not string:
+        return ''
+
     lines = string.split('\n')
 
-    if lines[0] == '' or lines[0].isspace():
+    if lines and (lines[0] == '' or lines[0].isspace()):
         del lines[0]
+
+    if lines == []:
+        return ''
 
     spaces = len(lines[0]) - len(lines[0].lstrip())
 

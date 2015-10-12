@@ -41,16 +41,18 @@ class Text(db.Model):
     publication_date = db.Column(db.Date)
     genre = db.Column(db.String(50))
     content = db.Column(db.Text)
+    revised_content = db.Column(db.Text)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
 
     def __init__(self, title='', author='', source='', publication_date='',
-                 genre='', content=''):
+                 genre='', content='', revised_content=''):
         self.title = title
         self.author = author
         self.source = source
         self.publication_date = publication_date
         self.genre = genre
         self.content = content
+        self.revised_content = revised_content
 
     @staticmethod
     def from_coh_text(text):
@@ -69,6 +71,7 @@ class Text(db.Model):
         obj.publication_date = text.publication_date
         obj.genre = text.genre
         obj.content = text.content
+        obj.revised_content = text.revised_content
 
         return obj
 
@@ -77,18 +80,20 @@ class Text(db.Model):
         :returns: A coh.base.Text instance with the same attributes as this one.
 
         """
-        obj = coh.base.Text(title=self.title,
+        obj = coh.base.Text(content=self.content,
+                            revised_content=self.revised_content,
+                            raw_as_xml=True,
+                            title=self.title,
                             author=self.author,
                             source=self.source,
                             publication_date=self.publication_date,
-                            genre=self.genre,
-                            content=self.content)
+                            genre=self.genre,)
 
         return obj
 
     def as_resultset(self):
         # TODO: check how this can be changed.
-        categories = coh.all_metrics.categories
+        categories = coh.ALL_METRICS.categories
         return coh.ResultSet([(cat, getattr(self, cat.table_name).as_resultset())
                                for cat in categories])
 
@@ -99,7 +104,7 @@ class Text(db.Model):
 
         """
         text = self.as_coh_text()
-        r = coh.all_metrics.values_for_text(text)
+        r = coh.ALL_METRICS.values_for_text(text)
 
         for category, results in r.items():
             C = find_category(category.table_name)
@@ -168,7 +173,7 @@ def generate_category(category):
 
 
 categories = [generate_category(category)
-              for category in coh.all_metrics.categories]
+              for category in coh.ALL_METRICS.categories]
 
 
 def find_category(name):

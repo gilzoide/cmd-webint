@@ -24,6 +24,15 @@
     cursor: pointer;
 }
 
+#submitRevisedContent {
+    height: 200px;
+    border: 1px solid #ccc;
+    padding-left: 12px;
+    padding-right: 12px;
+    padding-top: 6px;
+    padding-bottom: 6px;
+}
+
 @media (max-width: 768px) {
     .top-margin-xs {
         margin-top:20px;

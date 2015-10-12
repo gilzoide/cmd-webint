@@ -31,6 +31,15 @@ $(function () {
                                                 content == '');
     });
 
+    $('#submitRevisedContent').on('input', function () {
+        var content = $(this).html();
+
+        content = content.replace('<b>', '').replace('</b>', '');
+        content = content.replace('&lt;disf&gt;', '<b>&lt;disf&gt;</b>')
+
+        $(this).html(content);
+    });
+
     $('#exportCsvButton').on('click', function () {
         window.open("/metrics/" + textid + ".csv");
     });
