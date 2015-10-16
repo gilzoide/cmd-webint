@@ -157,7 +157,8 @@ def desc_to_html(string):
     if not string:
         return ''
 
-    lines = string.split('\n')
+    # We do a very simple escaping for the correct generation of HTML.
+    lines = string.replace('<', '&lt;').replace('>', '&gt;').split('\n')
 
     if lines and (lines[0] == '' or lines[0].isspace()):
         del lines[0]
