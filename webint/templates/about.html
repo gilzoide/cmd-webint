@@ -2,22 +2,18 @@
 
 {% block main_body %}
 
-<h1>Coh-Metrix-Port 2.0</h1>
+<h1>Coh-Metrix-Dementia 1.0</h1>
 
-<p>Coh-Metrix-Port is an adaptation of the <a href="http://cohmetrix.memphis.edu/cohmetrixpr/index.html" target="_blank">Coh-Metrix</a> text analysis tool to the Brazilian Portuguese language. Coh-Metrix, originally developed at the University of Memphis, is a Web-based tool that calculates textual metrics intended to evaluate cohesion, coherence, and readability of texts. It replaces and extends traditional, surface-level readability formulas by using a variety of NLP tools and resources to more accurately evaluate text coherence.</p>
-
-<p>Coh-Metrix-Port had already been implemented in Ruby, and used in several research scenarios. For more details, see Scarton &amp; Aluísio [2010] and Scarton et al. [2010]. This version is called Coh-Metrix-Port 1.0, and its code has not been released public.</p>
-
-<p>This 2.0 version is a complete, from-scratch rewrite of Coh-Metrix-Port 1.0 in Python. It uses updated resources and tools for improved performance.</p>
+<p>Coh-Metrix-Dementia is a tool that uses Natural Language Processing (NLP) tools and resources to allow for the extraction of textual metrics, which can be used to aid the automated analysis and detection of dementia, with initial focus on Alzheimer's Disease and Mild Cognitive Impairment. It's based on Coh-Metrix-Port, the Brazilian Portuguese adaptation of <a href="http://cohmetrix.com/">Coh-Metrix</a>. Coh-Metrix-Dementia is capable of extracting all the 48 metrics originally supported by Coh-Metrix-Port, and also 25 additional metrics that capture syntactical complexity, idea density, textual coherence, and disfluency level. All supported metrics are described in the <a href="{{ url_for('help') }}">Help</a> page.</p>
 
 <h1>References</h1>
 
-<p>Scarton, C. &amp; Aluísio, S. [2010]. Análise da Inteligibilidade de textos via ferramentas de Processamento de Língua Natural: adaptando as métricas do Coh-Metrix para o Português. Linguamática, 2(1), 45–62.</p>
+<p>Cunha, Andre Luiz Verucci da. (2015) <b>Coh-Metrix-Dementia: análise automática de distúrbios de linguagem nas demências utilizando Processamento de Línguas Naturais</b> / Andre Luiz Verucci da Cunha; orientadora Sandra Maria Aluísio. – São Carlos – SP, 2015. 151 p.</p>
 
-<p>Scarton, C., Gasperin, C., &amp; Aluisio, S. (2010). Revisiting the Readability Assessment of Texts in Portuguese. In A. Kuri-Morales &amp; G. Simari (Eds.), Advances in Artificial Intelligence – IBERAMIA 2010, volume 6433 of Lecture Notes in Computer Science (pp. 306–315). Springer Berlin Heidelberg.</p>
+<p>CUNHA, A.; SOUSA, L. Bender de; MANSUR, L.; ALUISIO, S. <b>Automatic proposition extraction from dependency trees: Helping early prediction of alzheimer’s disease from narratives</b>. In: Computer-Based Medical Systems (CBMS), 2015 IEEE 28th International Symposium on Computer-Based Medical Systems, 2015. p. 127–130.</p>
 
 <h1>Authors</h1>
 
-<p>The Python port of Coh-Metrix-Port and this website were developed by <a href="https://github.com/andrecunha/">Andre Cunha</a>. The metrics were extensively validated and documented (as seen in the <a href="help">Help</a> page) by <a href="https://github.com/nathanshartmann/">Nathan Siegle Hartmann</a>.</p>
+<p>The core library and this website were developed by <a href="https://github.com/andrecunha/">Andre Cunha</a>. The metrics were extensively validated and documented by <a href="https://github.com/nathanshartmann/">Nathan Siegle Hartmann</a> and Andre Cunha.</p>
 
 {% endblock %}
